@@ -1,0 +1,17 @@
+<div class="card mb-4">
+    <div class="card-header">
+        {{ obj.date_pub }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ obj.title }}</h5>
+        <p class="card-text">{{ obj.text | truncatewords:15 }}.</p>
+        <a href="{{ obj.get_absolute_url }}" class="btn btn-light">Reed</a>
+    </div>
+    <div class="card-footer text-muted">
+{#        Tags:#}
+{#        {% for tag in post.tags.all %}#}
+{#            <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>#}
+{#        {% endfor %}#}
+        Author: <a href="#">{{ obj.blog.owner }}</a>
+    </div>
+</div>

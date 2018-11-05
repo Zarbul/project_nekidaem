@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mb-5">Blogs:</h1>
+    {% for blog in object_list %}
+        <div class="row col-6">
+            <div class="card-body">
+                <h5 class="card-title">{{ blog.owner }}</h5>
+            </div>
+            <div class="form-group">
+                <form action="#" method="post">{% csrf_token %}
+                    <input type="hidden" value="{{ blog.owner_id }}" name="blog_id">
+                    {% if blog.owner_id in subscriptions %}
+                        <input type="submit" class="btn btn-primary" value="Отписаться">
+                    {% else %}
+                        <input type="submit" class="btn btn-primary" value="Подписаться">
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

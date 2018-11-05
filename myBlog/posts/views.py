@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from .models import Post
 from .forms import PostForm
 
@@ -16,10 +16,14 @@ class PostCreate(CreateView):
 
     def form_valid(self, form):
         post = form.save(commit=False)
-        # после того как добавим Блог и пользователей
-        # blog_article.blog = self.request.user.blog
+        post.blog = self.request.user.blog
         post.save()
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('posts_list', args=[self.request.user.blog.pk])
+        return reverse('posts_list')
+
+
+class PostDetail(DetailView):
+    model = Post
+    template_name = 'posts/post_detail.html'

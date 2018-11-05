@@ -2,25 +2,23 @@
 
 {% block content %}
     <h1 class="mb-5">Posts:</h1>
-{#    {% for blog in blogs %}#}
-{#        <div class="row col-6">#}
-{#            <div class="card-body">#}
-{#                <h5 class="card-title">{{ blog.user.username }}</h5>#}
-{#            </div>#}
-{#            <div class="form-group">#}
-{#            <form action="{% url 'subscribe' %}" method="post">{% csrf_token %}#}
-{#                <input type="hidden" value="{{ blog.user_id }}" name="blog_id">#}
-{#                {% if blog.user_id in subscriptions %}#}
-{#                    <input type="submit" class="btn btn-primary" value="Отписаться">#}
-{#                {% else %}#}
-{#                    <input type="submit" class="btn btn-primary" value="Подписаться">#}
-{#                {% endif %}#}
-{#            </form>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{##}
-{##}
-
-{#    {% endfor %}#}
+    {% for obj in object_list %}
+        <div class="card mb-4">
+            <div class="card-header">
+                {{ obj.date_pub }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ obj.title }}</h5>
+                <p class="card-text">{{ obj.text | truncatewords:15 }}.</p>
+                <a href="{% url 'post_detail' pk=obj.pk %}" class="btn btn-light">Reed</a>
+            </div>
+            <div class="card-footer text-muted">
+                {#        Tags:#}
+                {#        {% for tag in post.tags.all %}#}
+                {#            <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>#}
+                {#        {% endfor %}#}
+                Author: <a href="#">{{ obj.blog.owner }}</a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
