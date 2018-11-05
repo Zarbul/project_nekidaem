@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+
+
+{% block login %}
+    <div class="row">
+        <div class="large-offset-3 large-6 columns">
+            <form method="post" class="post-form">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                      оставляем пустоту чтобы не было текста помощи
+                    {% endif %}
+                    {% for error in field.errors %}
+                      <p>{{ error }}</p>
+                    {% endfor %}
+                  </p>
+                {% endfor %}
+
+                <button type="submit" class="add_button">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

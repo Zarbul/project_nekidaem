@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}
+            Blog Engine
+        {% endblock %}
+    </title>
+
+    {% block meta %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
+    {% block javascript %}{% endblock %}
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+{% block header %}
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'posts_list_url' %}">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog_list_url' %}">Blogs</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'feed' %}">Feed</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href=#>({{ user.username }})</a>#}
+{#                    </li>#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Выйти ({{ user.username }})</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                    </li>
+                {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8 offset-md-2">
+            {% block content %}
+                There is no any content for you
+            {% endblock %}
+
+            {% block login %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{#{% if request.user.is_autenticated and request.user.is_staff %}#}
+    <div class="admin-panel align-items-center">
+        <a href="/auth/login" class="btn btn-outline-info">Admin</a>
+        {% block user-panel %}{% endblock %}
+    </div>
+{#{% endif %}#}
+
+
+
+{% block footer %}{% endblock %}
+</body>
+</html>

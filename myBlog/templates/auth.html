@@ -1,0 +1,20 @@
+
+{% block auth %}
+
+    {% if user.is_authenticated %}
+        <div class="top-bar-right">
+            <ul class="menu simple vertical medium-horizontal">
+                 <li><a href=#>({{ user.username }})</a> </li>
+                 <li><a href="{% url 'logout' %}">Выйти ({{ user.username }})</a> </li>
+            </ul>
+        </div>
+    {% else %}
+        <div class="top-bar-right">
+            <ul class="menu simple vertical medium-horizontal">
+                <li><a href="{% url 'login' %}">Войти</a> </li>
+                <li><a href="{% url 'register' %}">Регистрация</a> </li>
+            </ul>
+        </div>
+    {% endif %}
+
+{% endblock %}
