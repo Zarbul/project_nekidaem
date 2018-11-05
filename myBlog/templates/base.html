@@ -30,14 +30,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'posts_list_url' %}">Posts</a>
+                    <a class="nav-link" href="{% url 'posts_list' %}">Posts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'blog_list_url' %}">Blogs</a>
+{#                    <a class="nav-link" href="{% url 'blog_list_url' %}">Blogs</a>#}
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'feed' %}">Feed</a>
+{#                    <a class="nav-link" href="{% url 'feed' %}">Feed</a>#}
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -46,9 +46,9 @@
             </form>
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href=#>({{ user.username }})</a>#}
-{#                    </li>#}
+                    <li class="nav-item">
+                        <a class="nav-link" href=#>({{ user.username }})</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Выйти ({{ user.username }})</a>
                     </li>
@@ -73,15 +73,14 @@
                 There is no any content for you
             {% endblock %}
 
-            {% block login %}
-            {% endblock %}
+            {% block login %}{% endblock %}
         </div>
     </div>
 </div>
 
 {#{% if request.user.is_autenticated and request.user.is_staff %}#}
     <div class="admin-panel align-items-center">
-        <a href="/auth/login" class="btn btn-outline-info">Admin</a>
+{#        <a href="/auth/login" class="btn btn-outline-info">Admin</a>#}
         {% block user-panel %}{% endblock %}
     </div>
 {#{% endif %}#}
