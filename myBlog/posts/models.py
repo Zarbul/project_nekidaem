@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from blogs.models import Blog
 from django.urls import reverse
 
 from django.db.models.signals import post_save
@@ -34,7 +35,7 @@ from time import time
 #
 
 class Post(models.Model):
-    # blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
 
     title = models.CharField('Заголовок', max_length=150, db_index=True)
     text = models.TextField(blank=True, db_index=True)
