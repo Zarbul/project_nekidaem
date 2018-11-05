@@ -20,16 +20,14 @@
                 Author: <a href="#">{{ obj.blog.owner }}</a>
 
                 <div class="form-group offset-2">
-                <form action="#" method="post">{% csrf_token %}
-                    <input type="hidden" value="{{ obj.blog.owner_id }}" name="blog_id">
-                    {% if blog.owner_id in subscriptions %}
-                        <input type="submit" class="btn btn-primary" value="Отписаться">
-                    {% else %}
-                        <input type="submit" class="btn btn-primary" value="Подписаться">
+                    {% if not request.user.is_anonymous %}
+                        {% if request.user not in obj.blog.subscribers.all %}
+                            <a href="{% url 'feed:subscribe' pk=obj.blog.pk %}" class="btn btn-primary">Подписаться</a>
+                        {% else %}
+                            <a href="{% url 'feed:unsubscribe' pk=obj.blog.pk %}" class="btn btn-primary">Отписаться</a>
+                        {% endif %}
                     {% endif %}
-                </form>
-            </div>
-
+                </div>
             </div>
         </div>
     {% endfor %}

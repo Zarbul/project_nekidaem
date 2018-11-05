@@ -6,11 +6,21 @@
     <h2>Feed</h2>
 
     {% for obj in object_list %}
-        {{ obj.title }}
-{#        <h2><a href="{% url '#' pk=obj.pk %}">{{ obj.title }}</a></h2>#}
-        <p>{{ obj.text|truncatechars:240 }}</p>
-        <p>{{ obj.date_pub|date }} {{ obj.date_pub|time }}</p>
+{#        <h2><a href="{% url 'blog_app:article_detail' pk=obj.pk %}"></a></h2>#}
 
+        <div class="card mb-4">
+            <div class="card-header row">
+                <h5>{{ obj.title }} - {{ obj.date_pub|date }} {{ obj.date_pub|time }}</h5>
+             </div>
+            <div class="card-body">
+                <p class="card-text">{{ obj.text|truncatechars:20 }}</p>
+                <a href="{% url 'post_detail' pk=obj.pk %}" class="btn btn-light">Reed</a>
+            </div>
+            <div class="card-footer text-muted col-8">
+{#                <p>{{ obj.date_pub|date }} {{ obj.date_pub|time }}</p>#}
+                Author: {{ obj.blog.owner }}
+            </div>
+        </div>
 {#        {% include 'blog_app/utils/article_menu.html' %}#}
 
         <hr>
