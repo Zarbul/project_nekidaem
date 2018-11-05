@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'posts',
     'loginsys',
     'blogs',
+    'feed',
 ]
 
 MIDDLEWARE = [

@@ -12,12 +12,24 @@
                 <p class="card-text">{{ obj.text | truncatewords:15 }}.</p>
                 <a href="{% url 'post_detail' pk=obj.pk %}" class="btn btn-light">Reed</a>
             </div>
-            <div class="card-footer text-muted">
+            <div class="card-footer text-muted row col-8">
                 {#        Tags:#}
                 {#        {% for tag in post.tags.all %}#}
                 {#            <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>#}
                 {#        {% endfor %}#}
                 Author: <a href="#">{{ obj.blog.owner }}</a>
+
+                <div class="form-group offset-2">
+                <form action="#" method="post">{% csrf_token %}
+                    <input type="hidden" value="{{ obj.blog.owner_id }}" name="blog_id">
+                    {% if blog.owner_id in subscriptions %}
+                        <input type="submit" class="btn btn-primary" value="Отписаться">
+                    {% else %}
+                        <input type="submit" class="btn btn-primary" value="Подписаться">
+                    {% endif %}
+                </form>
+            </div>
+
             </div>
         </div>
     {% endfor %}
