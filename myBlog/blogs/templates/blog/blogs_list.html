@@ -9,15 +9,10 @@
                 <div class="input-group-append">
                     {% if not request.user.is_anonymous %}
                         {% if request.user not in blog.subscribers.all %}
-                            <a href="{% url 'feed:subscribe' pk=blog.id %}" class="btn btn-primary">Подписаться</a>
+                            <a href="{% url 'blog_subscribe' pk=blog.id %}" class="btn btn-primary">Подписаться</a>
                         {% else %}
-                            <a href="{% url 'feed:unsubscribe' pk=blog.id %}" class="btn btn-primary">Отписаться</a>
+                            <a href="{% url 'blog_unsubscribe' pk=blog.id %}" class="btn btn-primary">Отписаться</a>
                         {% endif %}
-                        {#                {% if request.user not in article.read_by.all %}#}
-                        {#                    <li><a href="{% url 'mark_as_read' pk=article.pk %}">Mark as read</a></li>#}
-                        {#                {% else %}#}
-                        {#                    <li><a href="{% url 'mark_as_unread' pk=article.pk %}">Mark as unread</a></li>#}
-                        {#                {% endif %}#}
                     {% endif %}
                 </div>
             </div>
